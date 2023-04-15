@@ -1,6 +1,10 @@
 node {
 
    def mavenHome = tool name: "Maven 3.9.1"
+   
+   echo "The node name is : ${env.NODE_NAME}"
+   echo "The Job name is : ${env.JOB_NAME}"
+   echo "The Build number is : ${env.BUILD_NUMBER}"
 
     // Get source code
     
