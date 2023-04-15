@@ -1,0 +1,25 @@
+node {
+
+   def mavenHome = tool name: "Maven 3.9.1"
+
+    // Get source code
+    
+        stage('Check out SC') 
+        {git credentialsId: '21d70b97-84a8-441b-990b-d2274ee751f9', url: 'https://github.com/KushalALV/maven-web-application.git'}
+        
+    // Build stage
+    stage ('Build package')
+    {sh "$mavenHome/bin/mvn clean package"}
+    
+    // Generate Sonarqube report
+    
+    stage('Sonarqube report')
+    {sh "$mavenHome/bin/mvn sonar:sonar"}
+    
+    //Upload files to artifacts
+    stage('Upload files to artifacts')
+    {sh "$mavenHome/bin/mvn deploy"}
+    
+   
+    
+} //node closing
