@@ -12,11 +12,11 @@ node{
     
     stage ('Nexus Repository')
     {sh "$mavenhome/bin/mvn deploy"}
-    
+    /*
     stage ('Tomcat Deployment')
     
     sshagent(['f8b10c69-f173-4852-be45-4e53bf3bb8c0']) {
     sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@3.110.213.233:/opt/apache-tomcat-9.0.75/webapps"
 }
-    
+    */
 }
