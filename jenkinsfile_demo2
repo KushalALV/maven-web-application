@@ -13,9 +13,9 @@ stage ('Git checkout')
    
    stage('Nexus Repsitory')
    {sh "$maventool/bin/mvn deploy"}
-   
+   /*
    stage('Tomcat Deployment')
    sshagent(['21d41835-e44e-4787-bfeb-b4c4387cb429']) 
    {sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@3.110.213.233:/opt/apache-tomcat-9.0.75/webapps"}
-       
+       */
 }
