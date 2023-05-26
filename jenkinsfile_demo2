@@ -1,0 +1,21 @@
+node{
+    
+def maventool = tool name: "Maven3.9.0"
+
+stage ('Git checkout')
+{git branch: 'development', credentialsId: 'f40132c6-1f6e-4600-9f0f-82d3c072e364', url: 'https://github.com/KushalALV/maven-web-application.git'}
+   
+   stage('Maven Build')
+   {sh "$maventool/bin/mvn clean package"}
+   
+   stage('SonarQube')
+   {sh "$maventool/bin/mvn sonar:sonar"}
+   
+   stage('Nexus Repsitory')
+   {sh "$maventool/bin/mvn deploy"}
+   
+   stage('Tomcat Deployment')
+   sshagent(['21d41835-e44e-4787-bfeb-b4c4387cb429']) 
+   {sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@3.110.213.233:/opt/apache-tomcat-9.0.75/webapps"}
+       
+}
